@@ -1,0 +1,44 @@
+.about {
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact {
+    color: #06070E;
+    backdrop-filter: blur(5px);
+    width: 70%;
+    padding: 5%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 60px;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.section p {
+    font-size: 1.2em;
+    margin-top: -5px;
+}
+
+.section .information {
+    color: #00B1AA;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35em;
+}
+
+.information i {
+    font-size: 36px;
+    margin-right: 5px;
+}

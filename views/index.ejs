@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaCare</title>
+    <!-- <link rel="icon" href="/style/images/icon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/css/images/icon.ico" type="image/x-icon"/> -->
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/trajan-pro">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> 
+
+</head>
+<body>
+    <header>
+        <div>
+            <h1 class="title">NovaCare Medical Center</h1>
+        </div>
+        <nav class="navbar">
+            <a href="index" class="nav nav-home active">Acasă</a>
+            <a href="about" class="nav nav-about">Despre</a>
+            <a href="#" class="nav nav-doctors">Doctori</a>
+            <a href="#" class="nav nav-appointment">Nouă Programare</a>
+            <a href="#" class="nav nav-profile">Profil</a>
+            <button class="nav-btn btn-login">Log in</button>
+            <button class="nav-btn btn-logout">Log out</button>
+        </nav>
+    </header>
+
+    <div class="login-tab">
+        <span class="icon-close"><i class="material-icons">close</i></span>
+        
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><i class="material-icons">email</i></span>
+                    <input id="fromEmailLogin" type="email" required placeholder="Email" class="email">
+                </div>
+                <div class="input-box">
+                    <span class="icon"><i class="material-icons">lock</i></span>
+                    <input id="fromPasswordLogin" type="password" required placeholder="Parolă">
+                </div>
+                <button id="submitLogin" type="submit" class="btn-submit">Login</button>
+                <div class="login-register">
+                    <p>Nu ai cont? <a class="register-link">Register</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2>Register</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><i class="material-icons">person</i></span>
+                    <input id="fromUsername" type="text" required placeholder="Nume">
+                </div>
+                <div class="input-box">
+                    <span class="icon"><i class="material-icons">email</i></span>
+                    <input id="fromEmailRegister" type="email" required placeholder="Email" class="email">
+                </div>
+                <div class="input-box">
+                    <span class="icon"><i class="material-icons">lock</i></span>
+                    <input id="fromPasswordRegister" type="password" required placeholder="Parolă">
+                </div>
+                <button id="submitRegister" type="submit" class="btn-submit">Register</button>
+                <div class="login-register">
+                    <p>Ai deja cont? <a class="login-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container"></div>
+
+    <script src="/src/script.js"></script>
+</body>
+</html>
