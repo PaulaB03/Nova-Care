@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NovaCare</title>
-    <!-- <link rel="icon" href="/style/images/icon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="/css/images/icon.ico" type="image/x-icon"/> -->
+    <link rel="icon" href="/css/images/favicon.ico">
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/trajan-pro">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> 
@@ -53,12 +52,16 @@
             <h2>Register</h2>
             <form action="#">
                 <div class="input-box">
+                    <span class="icon"><i class="material-icons">email</i></span>
+                    <input id="fromEmailRegister" type="email" required placeholder="Email" class="email">
+                </div>
+                <div class="input-box">
                     <span class="icon"><i class="material-icons">person</i></span>
                     <input id="fromUsername" type="text" required placeholder="Nume">
                 </div>
                 <div class="input-box">
-                    <span class="icon"><i class="material-icons">email</i></span>
-                    <input id="fromEmailRegister" type="email" required placeholder="Email" class="email">
+                    <span class="icon"><i class="material-icons">call</i></span>
+                    <input id="fromPhone" type="text" pattern="[0][0-9]{9}" title="Error Message" required placeholder="Număr telefon"> 
                 </div>
                 <div class="input-box">
                     <span class="icon"><i class="material-icons">lock</i></span>
@@ -74,6 +77,6 @@
 
     <div class="container"></div>
 
-    <script src="/src/script.js"></script>
+    <script type="module" src="/src/script.js"></script>
 </body>
 </html>

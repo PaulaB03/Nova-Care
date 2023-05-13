@@ -145,28 +145,6 @@ header {
     outline: none;;
 }
 
-.remember-forgot {
-    margin: 10px 0 15px 0 ;
-    font-size: .8em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.remember-forgot label {
-    accent-color: #06070E;
-    margin-right: 3px;
-}
-
-.remember-forgot a {
-    color: #00b1aa;
-    text-decoration: none;
-}
-
-.remember-forgot a:hover {
-    text-decoration: underline;
-}
-
 .btn-submit {
     width: 100%;
     height: 45px;

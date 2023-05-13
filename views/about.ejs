@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NovaCare</title>
+    <link rel="icon" href="/css/images/favicon.ico">
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <link href="/css/about.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/trajan-pro">
@@ -52,18 +53,22 @@
             <h2>Register</h2>
             <form action="#">
                 <div class="input-box">
-                    <span class="icon"><i class="material-icons">person</i></span>
-                    <input type="text" required placeholder="Nume">
+                    <span class="icon"><i class="material-icons">email</i></span>
+                    <input id="fromEmailRegister" type="email" required placeholder="Email" class="email">
                 </div>
                 <div class="input-box">
-                    <span class="icon"><i class="material-icons">email</i></span>
-                    <input type="email" required placeholder="Email" class="email">
+                    <span class="icon"><i class="material-icons">person</i></span>
+                    <input id="fromUsername" type="text" required placeholder="Nume">
+                </div>
+                <div class="input-box">
+                    <span class="icon"><i class="material-icons">call</i></span>
+                    <input id="fromPhone" type="text" pattern="[0][0-9]{9}" title="Error Message" required placeholder="Număr telefon"> 
                 </div>
                 <div class="input-box">
                     <span class="icon"><i class="material-icons">lock</i></span>
-                    <input type="password" required placeholder="Parolă">
+                    <input id="fromPasswordRegister" type="password" required placeholder="Parolă">
                 </div>
-                <button type="submit" class="btn-submit">Register</button>
+                <button id="submitRegister" type="submit" class="btn-submit">Register</button>
                 <div class="login-register">
                     <p>Ai deja cont? <a class="login-link">Login</a></p>
                 </div>
@@ -93,7 +98,7 @@
                     <i class="material-icons">email</i>
                     <h2>Email</h2>
                 </div>
-                <p>service@novacare.com</p>
+                <p>service.clienti@novacare.ro</p>
             </div>
         </div>
     </div>
