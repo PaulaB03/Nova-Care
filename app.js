@@ -26,12 +26,12 @@ const pool = mysql.createPool({
 
 
 // // Get all patients
-// app.get('/pacienti', (req, res) => {
+// app.get('/pacient', (req, res) => {
 //     pool .getConnection((err, connection) => {
 //         if(err) throw err
 //         console.log(`connected as id ${connection.threadId}`)
 
-//         // quer (sqlString, callback)
+//         // query (sqlString, callback)
 //         connection.query('SELECT * from pacienti', (err, rows) => {
 //             connection.release()        // return the connection to pool
 
@@ -45,28 +45,48 @@ const pool = mysql.createPool({
 //     })
 // })
 
+// Get all doctors
+app.get('/doctori', (req, res) => {
+    pool .getConnection((err, connection) => {
+        if(err) throw err
+        console.log(`connected as id ${connection.threadId}`)
+
+        // query (sqlString, callback)
+        connection.query('SELECT * FROM doctori', (err, rows) => {
+            connection.release()        // return the connection to pool
+
+            if (!err) {
+                res.send(rows)
+            }
+            else {
+                console.log(err)
+            }
+        })
+    })
+})
+
 // Get patient by email and password
 app.get('/pacient/email/:email/password/:password', (req, res) => {
   pool.getConnection((err, connection) => {
     if (err) throw err
-      console.log(`connected as id ${connection.threadId}`)
+    console.log(`connected as id ${connection.threadId}`)
     
-      const { email, password } = req.params
+    const { email, password } = req.params
     
-      // query (sqlString, values, callback)
-      connection.query(
-        'SELECT * FROM pacienti WHERE email = ? AND parola = ?',
-        [email, password],
-        (err, rows) => {
-          connection.release(); // return the connection to pool
+    // query (sqlString, values, callback)
+    connection.query(
+      'SELECT * FROM pacienti WHERE email = ? AND parola = ?',
+      [email, password],
+      (err, rows) => {
+        connection.release(); // return the connection to pool
         
-          if (!err) {
-            res.send(rows);
-          } else {
-            console.log(err);
-          }
+        if (!err) {
+          res.send(rows);
+        } else {
+          console.log(err);
         }
-      )
+      }
+    )
   })
 })
 
@@ -77,7 +97,7 @@ app.get('/pacient/email/:email', (req, res) => {
     if(err) throw err
     console.log(`connected as id ${connection.threadId}`)
 
-    // quer (sqlString, callback)
+    // query (sqlString, callback)
     connection.query('SELECT * from pacienti WHERE email = ?', [req.params.email], (err, rows) => {
       connection.release()        // return the connection to pool
 
@@ -120,6 +140,11 @@ app.get('/index', (req, res) => {
 app.get('/about', (req, res) => {
   res.render('about')
 })
+
+app.get('/doctors', (req, res) => {
+  res.render('doctors')
+})
+
 
 app.listen(port, () => {
   console.log('Server started on port 5000')

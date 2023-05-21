@@ -1,0 +1,48 @@
+#doctors {
+    margin: auto;
+    margin-top: 130px;
+    margin-bottom: 70px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 15px 35px;
+    width: 90%;
+    color: #06070E;
+}
+
+.filter{
+    position: fixed;
+    margin-top: -47px;
+    background-color: #7ad0d0eb;
+    padding: 5px;
+}
+
+#specialization {
+    background-color: #033357b7;
+    color: #F3EFF5;
+    cursor: pointer;
+}
+
+.doctor {
+    background: #F3EFF5;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0 20px;
+    border-radius: 25px;
+    border: 1px solid #06070e73;
+}
+
+.picture {
+    width: 100%;
+    height: 100%;
+    border-radius: 25px 0 0 25px;
+    border: 1px solid #06070e73;
+}
+
+h2 {
+    color: #033257;
+}
+
+.hide {
+    display: none;
+}
