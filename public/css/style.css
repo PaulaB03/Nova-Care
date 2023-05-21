@@ -20,7 +20,7 @@ header {
     display: grid;
     grid-template-columns: 1fr 2fr;
     align-items: center;
-    background-color: #7ad0d0d0;
+    background-color: #7ad0d0eb;
 }
 
 .navbar {
@@ -30,7 +30,7 @@ header {
 .navbar a {
     color: #F3EFF5;
     position: relative;
-    font-size: 1.2em;
+    font-size: 1.3em;
     text-decoration: none;
     font-weight: 500;
     margin-left: 40px;
@@ -73,7 +73,7 @@ header {
     border-radius: 6px;
     outline: none;
     cursor: pointer;
-    font-size: 1.2em;
+    font-size: 1.3em;
     color: #F3EFF5;
     font-weight: 500;
     margin-left: 40px;
