@@ -18,63 +18,18 @@
             <h1 class="title">NovaCare Medical Center</h1>
         </div>
         <nav class="navbar">
-            <a href="index" class="nav nav-home">Acasă</a>
-            <a href="about" class="nav nav-about active">Despre</a>
-            <a href="doctors" class="nav nav-doctors">Doctori</a>
-            <a href="#" class="nav nav-appointment">Nouă Programare</a>
-            <a href="#" class="nav nav-profile">Profil</a>
-            <button class="nav-btn btn-login">Log in</button>
-            <button class="nav-btn btn-logout">Log out</button>
-        </nav>
+            <a href="/about" class="nav nav-about active">Despre</a>
+            <a href="/doctors" class="nav nav-doctors">Doctori</a>
+            <% if (!user) { %>
+              <a href="/login" class="nav nav-login">Log in</a>
+            <% } else { %>
+              <a href="/profile" class="nav nav-profile">Profil</a>
+              <a href="appointment" class="nav nav-appointment">Noua programare</a>
+              <a href="/logout" class="nav nav-logout">Log out</a>
+            <% } %>
+          </nav>
+          
     </header>
-
-    <div class="login-tab">
-        <span class="icon-close"><i class="material-icons">close</i></span>
-        
-        <div class="form-box login">
-            <h2>Login</h2>
-            <form action="#">
-                <div class="input-box">
-                    <span class="icon"><i class="material-icons">email</i></span>
-                    <input type="email" required placeholder="Email" class="email">
-                </div>
-                <div class="input-box">
-                    <span class="icon"><i class="material-icons">lock</i></span>
-                    <input type="password" required placeholder="Parolă">
-                </div>
-                <button type="submit" class="btn-submit">Login</button>
-                <div class="login-register">
-                    <p>Nu ai cont? <a class="register-link">Register</a></p>
-                </div>
-            </form>
-        </div>
-
-        <div class="form-box register">
-            <h2>Register</h2>
-            <form action="#">
-                <div class="input-box">
-                    <span class="icon"><i class="material-icons">email</i></span>
-                    <input id="fromEmailRegister" type="email" required placeholder="Email" class="email">
-                </div>
-                <div class="input-box">
-                    <span class="icon"><i class="material-icons">person</i></span>
-                    <input id="fromUsername" type="text" required placeholder="Nume">
-                </div>
-                <div class="input-box">
-                    <span class="icon"><i class="material-icons">call</i></span>
-                    <input id="fromPhone" type="text" pattern="[0][0-9]{9}" title="Error Message" required placeholder="Număr telefon"> 
-                </div>
-                <div class="input-box">
-                    <span class="icon"><i class="material-icons">lock</i></span>
-                    <input id="fromPasswordRegister" type="password" required placeholder="Parolă">
-                </div>
-                <button id="submitRegister" type="submit" class="btn-submit">Register</button>
-                <div class="login-register">
-                    <p>Ai deja cont? <a class="login-link">Login</a></p>
-                </div>
-            </form>
-        </div>
-    </div>
 
     <div class="about">
         <img src="css/images/logo.png">
@@ -103,6 +58,5 @@
         </div>
     </div>
 
-    <script src="/src/script.js"></script>
 </body>
 </html>
