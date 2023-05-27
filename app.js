@@ -9,7 +9,6 @@ const app = express()
 const port = process.env.PORT || 5000
 const fetch = require('node-fetch');
 const LocalStrategy = require('passport-local').Strategy;
-const passport = require('passport');
 const flash = require("express-flash")
 const session = require("express-session")
 var loggedIn = null;
@@ -26,9 +25,23 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }))
-app.use(passport.initialize())
-app.use(passport.session())
 
+const getFormattedDate = () => {
+  const today = new Date();
+  const year = today.getFullYear();
+  let month = today.getMonth();
+  let day = today.getDate() + 1;
+
+  // Pad single digits with leading zeros
+  if (month < 10) {
+    month = `0${month}`;
+  }
+  if (day < 10) {
+    day = `0${day}`;
+  }
+
+  return `${day}/${month}/${year}`;
+};
 
 app.use('/favicon.ico', express.static('/css/images/favicon.ico'))
 
@@ -65,6 +78,29 @@ app.get('/doctori', (req, res) => {
     })
 })
 
+// Get appointments
+app.get('/programari', (req, res) => {
+  pool.getConnection((err, connection) => {
+    if(err) throw err
+
+    const query = `
+    SELECT p.data, d.nume AS doctor_name, d.email AS doctor_email, d.nr_telefon AS doctor_phone, d.specializare AS specialization, d.cabinet AS room
+    FROM programari p
+    INNER JOIN doctori d ON p.id_doctor = d.id_doctor
+    WHERE p.id_pacient = ?
+    ORDER BY -p.data`;
+
+    connection.query(query, [loggedIn.id_pacient], (err, rows) => {
+      connection.release()
+
+      if (!err)
+        res.send(rows)
+      else  
+        console.log(err)
+    })
+  })
+})
+
 // Get all patient by email
 app.get('/pacient/email/:email', (req, res) => {
   pool .getConnection((err, connection) => {
@@ -83,6 +119,44 @@ app.get('/pacient/email/:email', (req, res) => {
     })
   })
 })
+
+app.get('/doctor/specialization/:specialization', (req, res) => {
+  const specialization = req.params.specialization;
+  
+  pool.getConnection((err, connection) => {
+    if (err) throw err;
+
+    const query = `
+      SELECT *
+      FROM doctori
+      WHERE specializare = ?`;
+
+    connection.query(query, [specialization], (err, rows) => {
+      connection.release();
+
+      if (!err)
+        res.send(rows);
+      else
+        console.log(err);
+    });
+  });
+});
+
+
+
+// Profile route to send user information
+app.get('/profile/user', (req, res) => {
+  // Check if the user is logged in
+  if (loggedIn) {
+    // User is logged in
+    const user = req.session.user;
+    // Send the user information as a JSON response
+    res.json(user);
+  } else {
+    // User is not logged in
+    res.status(401).json({ error: 'Unauthorized' });
+  }
+});
 
 // Login
 app.post("/login", (req, res) => {
@@ -157,6 +231,40 @@ app.post("/register", async (req, res) => {
   }
 })
 
+// Add appointment
+app.post('/appointment', async (req, res) => {
+  try {
+    const { id_doctor, data } = req.body;
+    const id_pacient = loggedIn.id_pacient; // Assuming you have stored the patient ID in the session
+
+    // Example code using a SQL query with placeholders
+    const query = 'INSERT INTO programari (id_doctor, id_pacient, data) VALUES (?, ?, ?)';
+    const values = [id_doctor, id_pacient, data];
+
+    pool.getConnection((err, connection) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+
+      connection.query(query, values, (err, result) => {
+        connection.release();
+
+        if (err) {
+          console.log(err);
+          return;
+        }
+
+        console.log("New appointment created!");
+        res.redirect("/profile");
+      });
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+
 // Routes
 app.get('/about', (req, res) => {
   res.render('about', { user: loggedIn });
@@ -185,11 +293,22 @@ app.get('/profile', (req, res) => {
     // User is not logged in, redirect to login page
     res.redirect('/login');
   }
+
 });
 
 app.get('/appointment', (req, res) => {
-  res.render('appointment')
-})
+  // Check if the user is logged in
+  if (loggedIn) {
+    // User is logged in
+    const user = req.session.user;
+    // Render the profile page with the user information
+    res.render('appointment', { currentDate: getFormattedDate() });
+  }
+  else {
+    // User is not logged in, redirect to login page
+    res.redirect('/login');
+  }
+});
 
 app.get('/logout', (req, res) => {
   // Clear the user session and set loggedIn to null
