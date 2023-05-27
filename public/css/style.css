@@ -22,7 +22,7 @@ header {
     display: grid;
     grid-template-columns: 1fr 2fr;
     align-items: center;
-    background-color: #7ad0d0eb;
+    background-color: #7ad0d0;
 }
 
 .navbar {

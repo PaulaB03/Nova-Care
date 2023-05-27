@@ -1,0 +1,17 @@
+#profile {
+    margin: auto;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    height: 100vh;
+}
+
+#information {
+    background-color: #00b1aa;
+    padding-top: 110px;
+    height: 100%;
+}
+
+#appointments {
+    padding-top: 110px;
+}

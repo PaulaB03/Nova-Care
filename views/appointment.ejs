@@ -7,6 +7,8 @@
     <title>NovaCare</title>
     <link rel="icon" href="/css/images/favicon.ico">
     <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/css/doctors.css" rel="stylesheet" type="text/css">
+    <link href="/css/appointment.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/trajan-pro">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> 
 
@@ -26,5 +28,27 @@
         </nav>
     </header>
 
+    <div class="containter">
+        <h2>Noua Programare</h2>
+        <form action="/appointment" method="GET">
+            <label for="specialization">Specializarea: </label>
+            <select id="specialization" name="specialization">
+              <option value="Cardiologie">Cardiologie</option>
+              <option value="Endrocrinologie">Endrocrinologie</option>
+              <option value="Ortopedie">Ortopedie</option>
+              <option value="Neurologie">Neurologie</option>
+              <option value="Pediatrie">Pediatrie</option>
+              <option value="Radiologie">Radiologie</option>
+            </select>
+            <label for="date">Data</label>
+            <input id="date" name="date" type="date" required placeholder="dd/mm/yyyy" min="<%= currentDate %>">
+            <button type="submit" class="btn-submit">Cauta Doctor</button>
+          </form>          
+    </div>
+
+    <div id="doctors">
+    </div>
+
+    <script src="/src/appointment.js"></script>
 </body>
 </html>
