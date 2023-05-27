@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaCare</title>
+    <link rel="icon" href="/css/images/favicon.ico">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/trajan-pro">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> 
+
+</head>
+<body>
+    <header>
+        <div>
+            <h1 class="title">NovaCare Medical Center</h1>
+        </div>
+        <nav class="navbar">
+            <a href="about" class="nav nav-about">Despre</a>
+            <a href="doctors" class="nav nav-doctor">Doctori</a>
+            <a href="profile" style="display: none" class="nav nav-profile">Profil</a>
+            <a href="login" class="nav nav-login  active">Log in</a>
+            
+        </nav>
+    </header>
+
+    <div class="login-tab">
+        <div class="form-box register">
+            <h2>Register</h2>
+            <form action="/register" method="POST">
+                <div class="input-box">
+                    <span class="icon"><i class="material-icons">email</i></span>
+                    <input id="fromEmailRegister" name="email" type="email" required placeholder="Email" class="email">
+                </div>
+                <div class="input-box">
+                    <span class="icon"><i class="material-icons">person</i></span>
+                    <input id="fromUsername" name="name" type="text" required placeholder="Nume">
+                </div>
+                <div class="input-box">
+                    <span class="icon"><i class="material-icons">call</i></span>
+                    <input id="fromPhone" name="phone" type="text" pattern="[0][0-9]{9}" title="Error Message" required placeholder="Număr telefon"> 
+                </div>
+                <div class="input-box">
+                    <span class="icon"><i class="material-icons">lock</i></span>
+                    <input id="fromPasswordRegister" name="password" type="password" required placeholder="Parolă">
+                </div>
+                <button id="submitRegister" type="submit" class="btn-submit">Register</button>
+                <div class="login-register">
+                    <p>Ai deja cont? <a href="login" class="login-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

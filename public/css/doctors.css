@@ -14,7 +14,9 @@
     position: fixed;
     margin-top: -47px;
     background-color: #7ad0d0eb;
-    padding: 5px;
+    padding: 5px 15px 10px 15px;
+    border-radius: 0 0 20px 0;
+    z-index: 1;
 }
 
 #specialization {
@@ -24,7 +26,8 @@
 }
 
 .doctor {
-    background: #F3EFF5;
+    /* background: #F3EFF5; */
+    backdrop-filter: blur(10px);
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 0 20px;

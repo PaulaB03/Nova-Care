@@ -16,7 +16,9 @@ header {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 1;
     width: 100%;
+    padding-right: 30px;
     display: grid;
     grid-template-columns: 1fr 2fr;
     align-items: center;
@@ -33,7 +35,7 @@ header {
     font-size: 1.3em;
     text-decoration: none;
     font-weight: 500;
-    margin-left: 40px;
+    margin-right: 40px;
 }
 
 .navbar a::after {
@@ -65,27 +67,6 @@ header {
 }
 
 
-.navbar .nav-btn {
-    width: 130px;
-    height: 50px;
-    background: transparent;
-    border: 2px solid #F3EFF5;
-    border-radius: 6px;
-    outline: none;
-    cursor: pointer;
-    font-size: 1.3em;
-    color: #F3EFF5;
-    font-weight: 500;
-    margin-left: 40px;
-    margin-right: 20px;
-    transition: .5s;
-}
-
-.navbar .nav-btn:hover {
-    background: #F3EFF5;
-    color: #7AD0D0;
-}
-
 .login-tab {
     position: absolute;
     top: 50%;
@@ -104,9 +85,6 @@ header {
 
 }
 
-.login-tab .form-box.register {
-    display: none;
-}
 
 .login-tab .icon-close {
     position: absolute;
@@ -174,8 +152,4 @@ header {
 .login-register p a:hover {
     cursor: pointer;
     text-decoration: underline;
-}
-
-.login-tab, .nav-appointment, .nav-profile, .btn-logout {
-    display: none;
 }
