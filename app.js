@@ -84,10 +84,10 @@ app.get('/programari', (req, res) => {
     if(err) throw err
 
     const query = `
-    SELECT p.data, d.nume AS doctor_name, d.email AS doctor_email, d.nr_telefon AS doctor_phone, d.specializare AS specialization, d.cabinet AS room
+    SELECT p.data, p.ora, d.nume AS doctor_name, d.email AS doctor_email, d.nr_telefon AS doctor_phone, d.specializare AS specialization, d.cabinet AS room
     FROM programari p
     INNER JOIN doctori d ON p.id_doctor = d.id_doctor
-    WHERE p.id_pacient = ?
+    WHERE p.id_pacient = ? 
     ORDER BY -p.data`;
 
     connection.query(query, [loggedIn.id_pacient], (err, rows) => {
@@ -141,6 +141,38 @@ app.get('/doctor/specialization/:specialization', (req, res) => {
     });
   });
 });
+
+
+// Get available doctors
+app.get('/available-doctors', (req, res) => {
+  const date = req.query.date;
+  const time = req.query.time;
+  const specialization = req.query.specialization;
+
+  pool.getConnection((err, connection) => {
+    if (err) throw err;
+
+    const query = `
+    SELECT d.*
+    FROM doctori d
+    WHERE d.id_doctor NOT IN (
+      SELECT p.id_doctor
+      FROM programari p
+      WHERE p.data = ? AND p.ora = ?)
+      AND d.specializare = ?`;
+
+    connection.query(query, [date, time, specialization], (err, results) => {
+      if (err) {
+        console.error('Error querying the database:', err);
+      } else {
+        // Return the available doctors as JSON response
+        res.json({ availableDoctors: results });
+      }
+    });
+  });
+});
+
+
 
 
 
@@ -234,12 +266,11 @@ app.post("/register", async (req, res) => {
 // Add appointment
 app.post('/appointment', async (req, res) => {
   try {
-    const { id_doctor, data } = req.body;
-    const id_pacient = loggedIn.id_pacient; // Assuming you have stored the patient ID in the session
+    const { id_doctor, data, time} = req.body;
+    const id_pacient = loggedIn.id_pacient; 
 
-    // Example code using a SQL query with placeholders
-    const query = 'INSERT INTO programari (id_doctor, id_pacient, data) VALUES (?, ?, ?)';
-    const values = [id_doctor, id_pacient, data];
+    const query = 'INSERT INTO programari (id_doctor, id_pacient, data, ora) VALUES (?, ?, ?, ?)';
+    const values = [id_doctor, id_pacient, data, time];
 
     pool.getConnection((err, connection) => {
       if (err) {
@@ -263,7 +294,6 @@ app.post('/appointment', async (req, res) => {
     console.log(err);
   }
 });
-
 
 // Routes
 app.get('/about', (req, res) => {
