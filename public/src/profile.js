@@ -27,17 +27,17 @@ fetch('http://localhost:5000/programari')
 
 // Function to render the user information
 function renderProfile(user) {
-    const userName = document.createElement('p').textContent = `${user.nume}`;
+    const userName = document.createElement('p').classList.toggle('info').textContent = `${user.nume}`;
     username.append(userName);
-    const userPhone = document.createElement('p').textContent = `${user.nr_telefon}`;
+    const userPhone = document.createElement('p').classList.toggle('info').textContent = `${user.nr_telefon}`;
     phone.append(userPhone);
-    const userGender = document.createElement('p').textContent = `${user.sex}`;
+    const userGender = document.createElement('p').classList.toggle('info').textContent = `${user.sex}`;
     gender.append(userGender);
-    const userBlood = document.createElement('p').textContent = `${user.grupa_sanguina}`;
+    const userBlood = document.createElement('p').classList.toggle('info').textContent = `${user.grupa_sanguina}`;
     blood.append(userBlood);
-    const userIllness = document.createElement('p').textContent = `${user.afectiuni}`;
+    const userIllness = document.createElement('p').classList.toggle('info').textContent = `${user.afectiuni}`;
     illness.append(userIllness);
-    const userAlergy = document.createElement('p').textContent = `${user.alergii}`;
+    const userAlergy = document.createElement('p').classList.toggle('info').textContent = `${user.alergii}`;
     alergy.append(userAlergy);
 }
 

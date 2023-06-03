@@ -7,21 +7,21 @@ form.addEventListener('submit', (event) => {
 
   const specialization = document.getElementById('specialization').value;
   const date = document.getElementById('date').value;
+  const time = document.getElementById('time').value + ':00';
 
   // Make an AJAX request to the server
   const xhr = new XMLHttpRequest();
-  xhr.open('GET', `/doctor/specialization/${encodeURIComponent(specialization)}?date=${encodeURIComponent(date)}`, true);
+  xhr.open('GET', `/available-doctors?specialization=${encodeURIComponent(specialization)}&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}`, true);
   xhr.onreadystatechange = function () {
     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-      const doctors = JSON.parse(xhr.responseText);
+      const availableDoctors = JSON.parse(xhr.responseText);
+      const doctors = availableDoctors.availableDoctors;
 
-      // Clear the doctorsContainer before adding new doctors
       menu.innerHTML = '';
+      for (var i = 0; i < doctors.length; i++)
+        appendDoctor(doctors[i]);
 
-      // Add new doctors
-      doctors.forEach((doctor) => {
-        appendDoctor(doctor);
-      });
+      console.log(doctors);
     }
   };
   xhr.send();
