@@ -1,7 +1,66 @@
 .containter {
-    margin-top: 100px;
+    margin-top: 95px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    
+}
+
+.containter h2 {
+    margin-right: 15px;
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 25px;
+}
+
+.form > * {
+    margin-right: 10px;
+}
+
+.date {
+    width: 70%;
 }
 
 #doctors {
+    margin: auto;
     margin-top: 30px;
+    margin-bottom: 70px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 15px 35px;
+    width: 90%;
+    color: #06070E;
+}
+
+.doctor {
+    backdrop-filter: blur(10px);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0 20px;
+    border-radius: 25px;
+    border: 1px solid #06070e73;
+}
+
+
+.picture {
+    width: 100%;
+    height: 100%;
+    border-radius: 25px 0 0 25px;
+    border: 1px solid #06070e73;
+}
+
+h2 {
+    color: #033257;
+}
+
+.submit-button {
+    width: 95%;
+    margin: 0 15px 15px 0;
 }
