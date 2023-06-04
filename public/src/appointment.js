@@ -96,22 +96,32 @@ function appendDoctor(doctor) {
 
 function createAppointment(doctorId) {
   const selectedDate = document.getElementById('date').value;
+  const selectedHour = document.getElementById('time').value;
 
   // Create the appointment data object
   const appointmentData = {
     id_doctor: doctorId,
     data: selectedDate,
+    ora: selectedHour
   };
+  console.log(appointmentData)
 
-  // Make an AJAX request to create the appointment
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', '/appointment', true);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+  fetch('/appointment', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(appointmentData)
+  })
+  .then(response => {
+    if (response.ok) {
       console.log('Appointment created successfully!');
       window.location.href = '/profile';
+    } else {
+      console.log('Appointment creation failed');
     }
-  };
-  xhr.send(JSON.stringify(appointmentData));
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
 }

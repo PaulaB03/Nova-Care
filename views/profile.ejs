@@ -30,26 +30,55 @@
     <div id="profile">
         <div id="information">
             <h2>Profil</h2>
+            <button class="modify btn-submit">Modifica informatii</button>
             <div class="section" id="name">
                 <p>Nume</p>
+                <p class="info" id="nume"></p>
             </div>
             <div class="section" id="phone">
                 <p>Numar telefon</p>
+                <p class="info" id="telefon"></p>
             </div>
             <div class="section" id="gender">
                 <p>Sex</p>
+                <p class="info" id="sex"></p>
             </div>
             <div class="section" id="blood">
                 <p>Grupa sange</p>
+                <p class="info" id="sange"></p>
             </div>
             <div class="section long" id="illness">
                 <p>Afectiuni</p>
+                <p class="info info-long" id="afectiuni"></p>
             </div>
             <div class="section long" id="alergy">
                 <p>Alergii</p>
+                <p class="info info-long" id="alergii"></p>
             </div>
         </div>
         <div id="appointments"></div>
+    </div>
+
+    <div class="login-tab">
+        <div class="form-box">
+            <span class="icon-close"><i class="material-icons">close</i></span>
+            <h2>Modificare informatii</h2>
+            <form action="/modify" method="POST">
+                <div class="input-box">
+                    <label>Telefon</label>
+                    <input id="phoneForm" name="phone" pattern="[0][0-9]{9}">
+                </div>
+                <div class="input-box">
+                    <label>Afectiuni</label>
+                    <input id="illnessForm" name="illness" type="text">
+                </div>
+                <div class="input-box">
+                    <label>Alergii</label>
+                    <input id="alergyForm" name="alergy" type="text">
+                </div>
+                <button id="submitInfo" type="submit" class="btn-submit">Modifica</button>
+            </form>
+        </div>
     </div>
 
     <script src="/src/profile.js"></script>

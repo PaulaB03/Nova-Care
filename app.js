@@ -172,8 +172,45 @@ app.get('/available-doctors', (req, res) => {
   });
 });
 
+app.post('/modify', async (req, res) => {
+  // Check if the user is logged in
+  if (loggedIn) {
+    // User is logged in
+    const user = req.session.user;
 
+    // Update the user information with the data from the request body
+    user.nr_telefon = req.body.phone;
+    user.afectiuni = req.body.illness;
+    user.alergii = req.body.allergy;
 
+    // Update the corresponding row in the database
+    const sql = 'UPDATE pacienti SET nr_telefon = ?, afectiuni = ?, alergii = ? WHERE id_pacient = ?';
+    const values = [user.nr_telefon, user.afectiuni, user.alergii, user.id_pacient];
+
+    try {
+      pool.getConnection((err, connection) => {
+        if (err) throw err;
+
+        connection.query(sql, values, (err, result) => {
+          connection.release(); // return the connection to pool
+          if (err) {
+            console.log(err);
+            res.status(500).json({ error: 'Internal Server Error' });
+          } else {
+            console.log('User information updated!');
+            res.json({ success: true });
+          }
+        });
+      });
+    } catch (e) {
+      console.log(e);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  } else {
+    // User is not logged in
+    res.status(401).json({ error: 'Unauthorized' });
+  }
+});
 
 
 // Profile route to send user information
@@ -266,7 +303,9 @@ app.post("/register", async (req, res) => {
 // Add appointment
 app.post('/appointment', async (req, res) => {
   try {
-    const { id_doctor, data, time} = req.body;
+    const id_doctor= req.body.id_doctor;
+    const data = req.body.data;
+    const time = req.body.ora;
     const id_pacient = loggedIn.id_pacient; 
 
     const query = 'INSERT INTO programari (id_doctor, id_pacient, data, ora) VALUES (?, ?, ?, ?)';

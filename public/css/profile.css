@@ -34,3 +34,11 @@
     background-color: aliceblue;
     width: 100%;
 }
+
+.icon-close {
+    cursor: pointer;
+}
+
+.login-tab {
+    display: none;
+}
