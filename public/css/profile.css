@@ -64,6 +64,7 @@
 
 .icon-close {
     cursor: pointer;
+    margin-right: 10px;
 }
 
 .login-tab {
@@ -84,6 +85,7 @@
 
 
 .appointment {
+    height: fit-content;
     width: 80%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -95,12 +97,27 @@
     margin-bottom: 25px;
 }
 
+.material-icons {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    z-index: 1;
+}
+
+.future {
+    color: #0B4F6C;
+}
+
+.past {
+    color: #20BF55;
+}
+
 .specialization { 
     color: #042138;
     grid-area: 1 / 1 / 2 / 3; 
     text-align: center;
-    background-color: aquamarine;
-    border-radius:  15px 15px 0 0;
+    background-color: rgba(10, 221, 214, 0.786);
+    border-radius:  12px 12px 0 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -135,14 +152,31 @@
     text-align: end;
 }
 
-.date { 
-    grid-area: 3 / 1 / 4 / 2;
-    margin: 0;
-    margin-right: 20px;
-    text-align: end;
+.date-time {
+    grid-area: 3 / 1 / 4 / 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.time { 
-    grid-area: 3 / 2 / 4 / 3; 
-    margin: 0;
+.date { 
+    margin-right: 20px;
+}
+
+
+.cancelBtn {
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    width: 25%;
+    height: 20%;
+    border-radius:  15px 0 12px 0;
+}
+
+.login-tab {
+    background: white;
+}
+
+input {
+    text-align: end;
 }
