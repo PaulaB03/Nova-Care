@@ -22,15 +22,21 @@ function fetchUserProfile() {
     });
 }
 
-// Fetch the appointments
-fetch('http://localhost:5000/programari')
-.then(function (response) {
-    response.json().then(function (programari) {
-        for (i=0; i < programari.length; i++)
-            appendAppointment(programari[i]);
-    })
-})
+function fetchAppointments() {
+  while (appointments.firstChild)
+    appointments.removeChild(appointments.firstChild);
 
+  // Fetch the appointments
+  fetch('http://localhost:5000/programari')
+  .then(function (response) {
+      response.json().then(function (programari) {
+          for (i=0; i < programari.length; i++)
+              appendAppointment(programari[i]);
+      })
+  })
+}
+
+const currentDate = new Date();
 
 // Function to render the user information
 function renderProfile(user) {
@@ -44,6 +50,10 @@ function renderProfile(user) {
 
 
 function appendAppointment(appointment) {
+    // Create appointment obj
+    let doc = document.createElement('div');
+    doc.classList.toggle('appointment');
+
     // Create specialization obj
     let specialization = document.createElement('h2');
     specialization.classList.toggle('specialization');
@@ -70,22 +80,47 @@ function appendAppointment(appointment) {
       year: 'numeric'
     });
     date.innerText = formattedDate;
+    
+    // Create cancel button
+    let cancelBtn = document.createElement('button');
+    cancelBtn.classList.add('btn-submit');
+    cancelBtn.classList.add('cancelBtn');
+    cancelBtn.textContent = "Anuleaza";
+
+    // Add click event listener to the button
+    cancelBtn.addEventListener('click', () => {
+      deleteAppointment(appointment['id_programare']);
+    })
+
+    // Create visual icon
+    const iconElement = document.createElement('i');
+    iconElement.classList.add('material-icons');
+    iconElement.textContent = 'circle';
+
+    if (dateObject < currentDate)
+      iconElement.classList.add('past');
+    else if (dateObject > currentDate) {
+      iconElement.classList.add('future');
+      doc.appendChild(cancelBtn);
+    }
+    else 
+      iconElement.classList.add('future');
 
     // Create time obj
     let time = document.createElement('p');
     time.classList.toggle('time');
     time.innerText = appointment['ora'].substring(0, 5);
 
-    // Create appointment obj
-    let doc = document.createElement('div');
-    doc.classList.toggle('appointment');
+    let dateTime = document.createElement('div');
+    dateTime.classList.add('date-time');
+    dateTime.appendChild(date);
+    dateTime.appendChild(time);
 
-
+    doc.appendChild(iconElement);
     doc.appendChild(specialization);
     doc.appendChild(name);
     doc.appendChild(room);
-    doc.appendChild(date);
-    doc.appendChild(time);
+    doc.appendChild(dateTime);
     appointments.appendChild(doc);
 }
 
@@ -148,4 +183,23 @@ document.getElementById("submitInfo").addEventListener("click", function(event) 
   });
 });
 
+function deleteAppointment(id) {
+  fetch(`http://localhost:5000/appointments/${id}`, {
+    method: 'DELETE'
+  })
+    .then(response => {
+      if (response.ok) {
+        console.log('Appointment deleted');
+      } else {
+        console.log('Failed to delete appointment');
+      }
+    })
+    .catch(error => {
+      console.log('Error:', error);
+    });
+
+  fetchAppointments();
+}
+
 fetchUserProfile();
+fetchAppointments();

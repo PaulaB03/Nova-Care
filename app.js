@@ -26,23 +26,6 @@ app.use(session({
   saveUninitialized: false
 }))
 
-const getFormattedDate = () => {
-  const today = new Date();
-  const year = today.getFullYear();
-  let month = today.getMonth();
-  let day = today.getDate() + 1;
-
-  // Pad single digits with leading zeros
-  if (month < 10) {
-    month = `0${month}`;
-  }
-  if (day < 10) {
-    day = `0${day}`;
-  }
-
-  return `${day}/${month}/${year}`;
-};
-
 app.use('/favicon.ico', express.static('/css/images/favicon.ico'))
 
 // Set views
@@ -84,7 +67,7 @@ app.get('/programari', (req, res) => {
     if(err) throw err
 
     const query = `
-    SELECT p.data, p.ora, d.nume AS doctor_name, d.email AS doctor_email, d.nr_telefon AS doctor_phone, d.specializare AS specialization, d.cabinet AS room
+    SELECT p.id_programare, p.data, p.ora, d.nume AS doctor_name, d.email AS doctor_email, d.nr_telefon AS doctor_phone, d.specializare AS specialization, d.cabinet AS room
     FROM programari p
     INNER JOIN doctori d ON p.id_doctor = d.id_doctor
     WHERE p.id_pacient = ? 
@@ -120,6 +103,7 @@ app.get('/pacient/email/:email', (req, res) => {
   })
 })
 
+// Get doctors based on specialization
 app.get('/doctor/specialization/:specialization', (req, res) => {
   const specialization = req.params.specialization;
   
@@ -136,6 +120,26 @@ app.get('/doctor/specialization/:specialization', (req, res) => {
 
       if (!err)
         res.send(rows);
+      else
+        console.log(err);
+    });
+  });
+});
+
+// Delete appointment
+app.delete('/appointments/:id', (req, res) => {
+  const appointmentId = req.params.id;
+
+  pool.getConnection((err, connection) => {
+    if (err) throw err;
+
+    const deleteQuery = `DELETE FROM programari WHERE id_programare = ?`;
+
+    connection.query(deleteQuery, [appointmentId], (err, rows) => {
+      connection.release();
+
+      if (!err)
+        console.log("Appointement deleted");
       else
         console.log(err);
     });
@@ -172,6 +176,7 @@ app.get('/available-doctors', (req, res) => {
   });
 });
 
+// Update user information
 app.post('/modify', async (req, res) => {
   // Check if the user is logged in
   if (loggedIn) {
@@ -371,7 +376,7 @@ app.get('/appointment', (req, res) => {
     // User is logged in
     const user = req.session.user;
     // Render the profile page with the user information
-    res.render('appointment', { currentDate: getFormattedDate() });
+    res.render('appointment');
   }
   else {
     // User is not logged in, redirect to login page
